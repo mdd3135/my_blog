@@ -85,6 +85,8 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      // locale: const Locale.fromSubtags(
+      //     languageCode: 'zh', scriptCode: 'Hans', countryCode: "CN"),
       routerConfig: Values.router,
     );
   }
