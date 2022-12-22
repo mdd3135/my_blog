@@ -40,6 +40,8 @@ dependencies:
   http: ^0.13.5
   flutter_markdown: ^0.6.13
   url_launcher: ^6.1.7
+  dynamic_fonts: ^2.0.0
+  web_fonts: ^1.1.1
   google_fonts: ^3.0.1
 
 dev_dependencies:
@@ -82,10 +84,10 @@ flutter:
   # example:
 
 
-  fonts:
-    - family: SourceHanSansCN
-      fonts:
-        - asset: fonts/SourceHanSansCN-Regular.otf
+  # fonts:
+  #   - family: SourceHanSansCN
+  #     fonts:
+  #       - asset: fonts/SourceHanSansCN-Regular.otf
   #   - family: SourceHanSerifCN
   #     fonts:
   #       - asset: fonts/SourceHanSerifCN-Regular.otf

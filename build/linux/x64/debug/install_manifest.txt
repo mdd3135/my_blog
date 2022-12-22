@@ -9,10 +9,5 @@
 /home/mdd/文档/flutter/my_blog/build/linux/x64/debug/bundle/data/flutter_assets/NOTICES
 /home/mdd/文档/flutter/my_blog/build/linux/x64/debug/bundle/data/flutter_assets/shaders/ink_sparkle.frag
 /home/mdd/文档/flutter/my_blog/build/linux/x64/debug/bundle/data/flutter_assets/kernel_blob.bin
-/home/mdd/文档/flutter/my_blog/build/linux/x64/debug/bundle/data/flutter_assets/fonts/NotoSansCJK-Regular.ttc
-/home/mdd/文档/flutter/my_blog/build/linux/x64/debug/bundle/data/flutter_assets/fonts/Cantarell-VF.otf
-/home/mdd/文档/flutter/my_blog/build/linux/x64/debug/bundle/data/flutter_assets/fonts/SourceHanSerifCN-Regular.otf
-/home/mdd/文档/flutter/my_blog/build/linux/x64/debug/bundle/data/flutter_assets/fonts/wqy-zenhei.ttc
 /home/mdd/文档/flutter/my_blog/build/linux/x64/debug/bundle/data/flutter_assets/fonts/MaterialIcons-Regular.otf
-/home/mdd/文档/flutter/my_blog/build/linux/x64/debug/bundle/data/flutter_assets/fonts/SourceHanSansCN-Regular.otf
 /home/mdd/文档/flutter/my_blog/build/linux/x64/debug/bundle/data/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf
