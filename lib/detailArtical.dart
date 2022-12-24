@@ -59,8 +59,10 @@ class _DetailArticalState extends State<DetailArtical> {
               child: Column(
                 children: [
                   Container(
-                    margin: const EdgeInsets.only(bottom: 10),
+                    margin:
+                        const EdgeInsets.only(bottom: 10, left: 20, right: 20),
                     child: Text(
+                        textAlign: TextAlign.center,
                         style:
                             const TextStyle(color: Colors.white, fontSize: 36),
                         getTitle()),
@@ -121,7 +123,7 @@ class _DetailArticalState extends State<DetailArtical> {
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: Color.fromARGB(16, 33, 149, 243),
+            color: const Color.fromARGB(16, 33, 149, 243),
           ),
           margin: const EdgeInsets.all(20),
           width: 800,
@@ -131,6 +133,7 @@ class _DetailArticalState extends State<DetailArtical> {
                 if (snapshot.hasData) {
                   return Markdown(
                       styleSheet: Values.markdownStyleSheet,
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       onTapLink: (text, url, title) {
                         launchUrl(Uri.parse(url!));
@@ -143,7 +146,7 @@ class _DetailArticalState extends State<DetailArtical> {
         ),
         Container(
           width: 800,
-          margin: EdgeInsets.only(bottom: 20, left: 20, right: 20),
+          margin: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
           child: MessageWidget(
             artical: widget.detail,
             messageItem: messageItem,

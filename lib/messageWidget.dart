@@ -80,9 +80,13 @@ class _MessageWidgetState extends State<MessageWidget> {
                 ? Container(
                     width: 800,
                     margin: const EdgeInsets.all(20),
-                    child: const Text("暂无留言，快来留下你的足迹吧～", style: TextStyle(fontSize: 20),),
+                    child: const Text(
+                      "暂无留言，快来留下你的足迹吧～",
+                      style: TextStyle(fontSize: 20),
+                    ),
                   )
                 : ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: widget.messageItem.length * 2,
                     itemBuilder: (context, index) {

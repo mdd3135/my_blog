@@ -29,7 +29,8 @@ class _ArticalPageState extends State<ArticalPage> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    return Center(
+    return Container(
+      alignment: AlignmentDirectional.topCenter,
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 1340),
         child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -41,21 +42,19 @@ class _ArticalPageState extends State<ArticalPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Flexible(
-                        child: Container(
-                          margin: const EdgeInsets.only(top: 20, left: 20),
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                                suffix: IconButton(
-                                  onPressed: () {
-                                    _onSearchPressed(searchText);
-                                  },
-                                  icon: const Icon(Icons.search),
-                                ),
-                                border: const UnderlineInputBorder(),
-                                hintText: "在此搜索"),
-                            onChanged: (value) => searchText = value,
-                          ),
+                      Container(
+                        margin: const EdgeInsets.only(top: 20, left: 20),
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                              suffix: IconButton(
+                                onPressed: () {
+                                  _onSearchPressed(searchText);
+                                },
+                                icon: const Icon(Icons.search),
+                              ),
+                              border: const UnderlineInputBorder(),
+                              hintText: "在此搜索"),
+                          onChanged: (value) => searchText = value,
                         ),
                       ),
                       Container(
@@ -105,43 +104,126 @@ class _ArticalPageState extends State<ArticalPage> {
                 )
               : const Text(""),
           Flexible(
-            child: Container(
-                margin: const EdgeInsets.only(
-                    top: 20, bottom: 20, left: 20, right: 20),
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(16, 33, 149, 243),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: ListView.builder(
-                  itemCount: Values.articalItem.length * 2,
-                  itemBuilder: (context, index) {
-                    int realIndex = index ~/ 2;
-                    if (index % 2 == 1) {
-                      return index == Values.articalItem.length * 2 - 1
-                          ? Container()
-                          : const Divider();
-                    } else {
-                      return ListTile(
-                        onTap: () {
-                          _onArticalPressed(
-                              Values.articalItem[realIndex]["create_time"]);
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  width < 900
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(
+                                  top: 20, left: 20, right: 20),
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                    suffix: IconButton(
+                                      onPressed: () {
+                                        _onSearchPressed(searchText);
+                                      },
+                                      icon: const Icon(Icons.search),
+                                    ),
+                                    border: const UnderlineInputBorder(),
+                                    hintText: "在此搜索"),
+                                onChanged: (value) => searchText = value,
+                              ),
+                            ),
+                            Container(
+                                margin: const EdgeInsets.only(
+                                    top: 20, left: 20, right: 20),
+                                child: const Text(
+                                  "文章分类",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  ),
+                                )),
+                            Container(
+                                margin: const EdgeInsets.only(
+                                    top: 10, bottom: 20, left: 20, right: 20),
+                                decoration: BoxDecoration(
+                                  color: const Color.fromARGB(16, 33, 149, 243),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: ListView.builder(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemCount: Values.articalType.length * 2,
+                                  itemBuilder: (context, index) {
+                                    int realIndex = index ~/ 2;
+                                    if (index % 2 == 1) {
+                                      return index ==
+                                              Values.articalType.length * 2 - 1
+                                          ? const Text("")
+                                          : const Divider();
+                                    } else {
+                                      return ListTile(
+                                        onTap: () {
+                                          _onTypeTap(Values
+                                              .articalType[realIndex]["type_id"]
+                                              .toString());
+                                        },
+                                        title: Text(Values
+                                            .articalType[realIndex]["type"]),
+                                        trailing: Text(Values
+                                            .articalType[realIndex]["count"]
+                                            .toString()),
+                                      );
+                                    }
+                                  },
+                                ))
+                          ],
+                        )
+                      : const Text(""),
+                  Container(
+                    margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
+                    child: const Text(
+                      "最新文章",
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ),
+                  Container(
+                      margin: const EdgeInsets.only(
+                          top: 10, bottom: 20, left: 20, right: 20),
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(16, 33, 149, 243),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: Values.articalItem.length * 2,
+                        itemBuilder: (context, index) {
+                          int realIndex = index ~/ 2;
+                          if (index % 2 == 1) {
+                            return index == Values.articalItem.length * 2 - 1
+                                ? Container()
+                                : const Divider();
+                          } else {
+                            return ListTile(
+                              onTap: () {
+                                _onArticalPressed(Values.articalItem[realIndex]
+                                    ["create_time"]);
+                              },
+                              leading: Image(
+                                  image: NetworkImage(
+                                      "${Values.serverUrl}/file/${Values.articalItem[realIndex]["picture"]}")),
+                              title:
+                                  Text(Values.articalItem[realIndex]["title"]),
+                              subtitle: Text(
+                                Values.articalItem[realIndex]["subtitle"],
+                                maxLines: 5,
+                              ),
+                              trailing: width > 600
+                                  ? Text(
+                                      "${getDateTime(Values.articalItem[realIndex]["create_time"])}\n${getType(Values.articalItem[realIndex]["create_time"])}")
+                                  : null,
+                            );
+                          }
                         },
-                        leading: Image(
-                            image: NetworkImage(
-                                "${Values.serverUrl}/file/${Values.articalItem[realIndex]["picture"]}")),
-                        title: Text(Values.articalItem[realIndex]["title"]),
-                        subtitle: Text(
-                          Values.articalItem[realIndex]["subtitle"],
-                          maxLines: 5,
-                        ),
-                        trailing: width > 600
-                            ? Text(
-                                "${getDateTime(Values.articalItem[realIndex]["create_time"])}\n${getType(Values.articalItem[realIndex]["create_time"])}")
-                            : null,
-                      );
-                    }
-                  },
-                )),
+                      ))
+                ],
+              ),
+            ),
           ),
           width >= 1200
               ? ConstrainedBox(
@@ -157,7 +239,7 @@ class _ArticalPageState extends State<ArticalPage> {
                           )),
                       Container(
                         width: 250,
-                        margin: EdgeInsets.only(right: 20),
+                        margin: const EdgeInsets.only(right: 20),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: const Color.fromARGB(16, 33, 149, 243),
@@ -194,7 +276,7 @@ class _ArticalPageState extends State<ArticalPage> {
                               ),
                               IconButton(
                                   onPressed: getRandomArtical,
-                                  icon: Icon(Icons.refresh))
+                                  icon: const Icon(Icons.refresh))
                             ],
                           )),
                       Flexible(

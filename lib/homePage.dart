@@ -24,7 +24,16 @@ class _HomePageState extends State<HomePage> {
   late Widget title;
 
   @override
+  void initState() {
+    if (widget.initIndex == 0) {
+      Values.router.go("/artical");
+    }
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     if (widget.initIndex == 0) {
       body = const ArticalPage();
       title = InkWell(
@@ -73,42 +82,89 @@ class _HomePageState extends State<HomePage> {
     }
 
     return MaterialApp(
-      theme: ThemeData(
-          fontFamily: "SourceHanSansCN"),
+      theme: ThemeData(fontFamily: "SourceHanSansCN"),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: title,
-          actions: [
-            IconButton(
-                tooltip: "文章",
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                onPressed: () {
-                  Values.router.go("/artical");
-                },
-                icon: Icon(widget.initIndex == 0
-                    ? Icons.library_books
-                    : Icons.library_books_outlined)),
-            IconButton(
-                tooltip: "关于",
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                onPressed: () {
-                  Values.router.go("/about");
-                },
-                icon: Icon(widget.initIndex == 1
-                    ? Icons.contact_support
-                    : Icons.contact_support_outlined)),
-            IconButton(
-                tooltip: "留言板",
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                onPressed: () {
-                  Values.router.go("/message");
-                },
-                icon: Icon(widget.initIndex == 2
-                    ? Icons.message
-                    : Icons.message_outlined)),
-          ],
+          actions: width > 600
+              ? <Widget>[
+                  IconButton(
+                      tooltip: "文章",
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      onPressed: () {
+                        Values.router.go("/artical");
+                      },
+                      icon: Icon(widget.initIndex == 0
+                          ? Icons.library_books
+                          : Icons.library_books_outlined)),
+                  IconButton(
+                      tooltip: "关于",
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      onPressed: () {
+                        Values.router.go("/about");
+                      },
+                      icon: Icon(widget.initIndex == 1
+                          ? Icons.contact_support
+                          : Icons.contact_support_outlined)),
+                  IconButton(
+                      tooltip: "留言板",
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      onPressed: () {
+                        Values.router.go("/message");
+                      },
+                      icon: Icon(widget.initIndex == 2
+                          ? Icons.message
+                          : Icons.message_outlined)),
+                ]
+              : null,
         ),
+        drawer: width > 600
+            ? null
+            : Drawer(
+                child: ListView(
+                  padding: EdgeInsets.zero,
+                  children: [
+                    const DrawerHeader(
+                      decoration: BoxDecoration(color: Colors.blue),
+                      child: Text(
+                        "导航",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                    ),
+                    ListTile(
+                      leading: Icon(widget.initIndex == 0
+                          ? Icons.library_books
+                          : Icons.library_books_outlined),
+                      title: const Text("文章"),
+                      onTap: () {
+                        Navigator.of(context).pop();
+                        Values.router.go("/artical");
+                      },
+                    ),
+                    ListTile(
+                      leading: Icon(widget.initIndex == 1
+                          ? Icons.contact_support
+                          : Icons.contact_support_outlined),
+                      title: const Text("关于"),
+                      onTap: () {
+                        Navigator.of(context).pop();
+                        Values.router.go("/about");
+                      },
+                    ),
+                    ListTile(
+                      leading: Icon(widget.initIndex == 2
+                          ? Icons.message
+                          : Icons.message_outlined),
+                      title: const Text("留言板"),
+                      onTap: () {
+                        Navigator.of(context).pop();
+                        Values.router.go("/message");
+                      },
+                    ),
+                  ],
+                ),
+              ),
         body: body,
       ),
     );

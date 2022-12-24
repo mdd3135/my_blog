@@ -82,6 +82,7 @@ class _AboutPageState extends State<AboutPage> {
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return Markdown(
+                      physics: const NeverScrollableScrollPhysics(),
                       styleSheet: Values.markdownStyleSheet,
                       shrinkWrap: true,
                       onTapLink: (text, url, title) {
