@@ -3,8 +3,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:http/http.dart' as http;
+import 'package:my_blog/messageWidget.dart';
 import 'package:my_blog/values.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:http/http.dart' as http;
 
 class DetailArtical extends StatefulWidget {
   const DetailArtical({
@@ -19,6 +21,16 @@ class DetailArtical extends StatefulWidget {
 }
 
 class _DetailArticalState extends State<DetailArtical> {
+  int visit = 0;
+  List<Map<String, String>> messageItem = [];
+
+  @override
+  void initState() {
+    getVisit();
+    getMessageItem();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     if (widget.detail.isEmpty) {
@@ -65,7 +77,9 @@ class _DetailArticalState extends State<DetailArtical> {
                           )),
                           TextSpan(
                               style: const TextStyle(
-                                  color: Colors.white, fontSize: 20),
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontFamily: "SourceHanSansCN"),
                               text: getDateTime()),
                         ],
                       ),
@@ -81,8 +95,21 @@ class _DetailArticalState extends State<DetailArtical> {
                         )),
                         TextSpan(
                             style: const TextStyle(
-                                color: Colors.white, fontSize: 20),
-                            text: getType()),
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontFamily: "SourceHanSansCN"),
+                            text: "${getType()}    "),
+                        const WidgetSpan(
+                            child: Icon(
+                          color: Colors.white,
+                          Icons.visibility,
+                        )),
+                        TextSpan(
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontFamily: "SourceHanSansCN"),
+                            text: " ${visit.toString()}"),
                       ],
                     ),
                   ),
@@ -114,8 +141,38 @@ class _DetailArticalState extends State<DetailArtical> {
                 return Container();
               }),
         ),
+        Container(
+          width: 800,
+          margin: EdgeInsets.only(bottom: 20, left: 20, right: 20),
+          child: MessageWidget(
+            artical: widget.detail,
+            messageItem: messageItem,
+          ),
+        )
       ],
     )));
+  }
+
+  void getMessageItem() async {
+    await http
+        .get(Uri.parse(
+            "${Values.serverUrl}/message_query?artical=${widget.detail}"))
+        .then((response) {
+      var response2 = utf8.decode(response.bodyBytes);
+      Map<String, dynamic> responseMap = jsonDecode(response2);
+      List<dynamic> content = responseMap["content"];
+      for (int i = 0; i < content.length; i++) {
+        Map<String, dynamic> tmp = content[i];
+        messageItem.add({
+          "artical": tmp["artical"],
+          "create_time": tmp["create_time"],
+          "name": tmp["name"],
+          "content": tmp["content"]
+        });
+      }
+      messageItem = messageItem.reversed.toList();
+    });
+    setState(() {});
   }
 
   Future<String> getTextData() async {
@@ -199,5 +256,17 @@ class _DetailArticalState extends State<DetailArtical> {
     } catch (e) {
       return "";
     }
+  }
+
+  void getVisit() async {
+    await http
+        .get(Uri.parse(
+            "${Values.serverUrl}/visit_query?artical=${widget.detail}"))
+        .then(((response) {
+      var visitResponse = utf8.decode(response.bodyBytes);
+      Map<String, dynamic> visitMap = jsonDecode(visitResponse);
+      visit = visitMap["count"];
+    }));
+    setState(() {});
   }
 }

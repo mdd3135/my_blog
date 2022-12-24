@@ -8,6 +8,11 @@ import 'package:http/http.dart' as http;
 import 'homePage.dart';
 
 main() async {
+  await http.get(Uri.parse("${Values.serverUrl}/visit_query?artical=total")).then(((response) {
+    var visitResponse = utf8.decode(response.bodyBytes);
+    Map<String, dynamic> visitMap = jsonDecode(visitResponse);
+    Values.visit = visitMap["count"];
+  }));
   await http.get(Uri.parse("${Values.serverUrl}/type_query")).then((response) {
     var typeResponse = utf8.decode(response.bodyBytes);
     Map<String, dynamic> typeMap = jsonDecode(typeResponse);
