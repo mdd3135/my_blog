@@ -157,6 +157,7 @@ class _ArticalPageState extends State<ArticalPage> {
                           )),
                       Container(
                         width: 250,
+                        margin: EdgeInsets.only(right: 20),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: const Color.fromARGB(16, 33, 149, 243),
