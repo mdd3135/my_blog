@@ -5,7 +5,6 @@ import 'package:my_blog/values.dart';
 import 'aboutPage.dart';
 import 'articalPage.dart';
 import 'messagePage.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({

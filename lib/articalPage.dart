@@ -1,6 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:my_blog/values.dart';
 
 class ArticalPage extends StatefulWidget {
@@ -13,10 +16,13 @@ class ArticalPage extends StatefulWidget {
 class _ArticalPageState extends State<ArticalPage> {
   // late Timer _timer;
   String searchText = '';
+  String runningTime = "";
 
   @override
   void initState() {
     for (int i = 0; i < Values.articalItem.length; i++) {}
+    getRunningTime();
+    getRandomArtical();
     super.initState();
   }
 
@@ -33,27 +39,32 @@ class _ArticalPageState extends State<ArticalPage> {
                     maxWidth: 250,
                   ),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Flexible(
                         child: Container(
                           margin: const EdgeInsets.only(top: 20, left: 20),
                           child: TextFormField(
-                              decoration: InputDecoration(
-                                  suffix: IconButton(
-                                    onPressed: () {
-                                      _onSearchPressed(searchText);
-                                    },
-                                    icon: const Icon(Icons.search),
-                                  ),
-                                  border: const UnderlineInputBorder(),
-                                  hintText: "在此搜索")),
+                            decoration: InputDecoration(
+                                suffix: IconButton(
+                                  onPressed: () {
+                                    _onSearchPressed(searchText);
+                                  },
+                                  icon: const Icon(Icons.search),
+                                ),
+                                border: const UnderlineInputBorder(),
+                                hintText: "在此搜索"),
+                            onChanged: (value) => searchText = value,
+                          ),
                         ),
                       ),
                       Container(
-                          margin: const EdgeInsets.only(top: 20),
+                          margin: const EdgeInsets.only(top: 20, left: 20),
                           child: const Text(
                             "文章分类",
-                            style: TextStyle(fontSize: 20),
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
                           )),
                       Flexible(
                           child: Container(
@@ -107,7 +118,7 @@ class _ArticalPageState extends State<ArticalPage> {
                     int realIndex = index ~/ 2;
                     if (index % 2 == 1) {
                       return index == Values.articalItem.length * 2 - 1
-                          ? const Text("")
+                          ? Container()
                           : const Divider();
                     } else {
                       return ListTile(
@@ -123,8 +134,10 @@ class _ArticalPageState extends State<ArticalPage> {
                           Values.articalItem[realIndex]["subtitle"],
                           maxLines: 5,
                         ),
-                        trailing: Text(
-                            "${getDateTime(Values.articalItem[realIndex]["create_time"])}\n${getType(Values.articalItem[realIndex]["create_time"])}"),
+                        trailing: width > 600
+                            ? Text(
+                                "${getDateTime(Values.articalItem[realIndex]["create_time"])}\n${getType(Values.articalItem[realIndex]["create_time"])}")
+                            : null,
                       );
                     }
                   },
@@ -134,12 +147,54 @@ class _ArticalPageState extends State<ArticalPage> {
               ? ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: 250),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                          margin: const EdgeInsets.only(top: 20),
+                          margin: const EdgeInsets.only(top: 20, bottom: 10),
                           child: const Text(
-                            "随机文章",
+                            "统计信息",
                             style: TextStyle(fontSize: 20),
+                          )),
+                      Container(
+                        width: 250,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: const Color.fromARGB(16, 33, 149, 243),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(
+                                  top: 10, right: 10, left: 10),
+                              child: Text(
+                                "访问次数: ${Values.visit}",
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(
+                                  top: 10, bottom: 10, right: 10, left: 10),
+                              child: Text(
+                                "本站已运行$runningTime",
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                          margin: const EdgeInsets.only(top: 20),
+                          child: Row(
+                            children: [
+                              const Text(
+                                "随机文章",
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              IconButton(
+                                  onPressed: getRandomArtical,
+                                  icon: Icon(Icons.refresh))
+                            ],
                           )),
                       Flexible(
                           child: Container(
@@ -147,7 +202,7 @@ class _ArticalPageState extends State<ArticalPage> {
                                   top: 10, bottom: 20, right: 20),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                color: const Color.fromARGB(32, 33, 149, 243),
+                                color: const Color.fromARGB(16, 33, 149, 243),
                               ),
                               child: ListView.builder(
                                 shrinkWrap: true,
@@ -163,7 +218,10 @@ class _ArticalPageState extends State<ArticalPage> {
                                     return ListTile(
                                       title: Text(Values
                                           .randomArtical[realIndex]["title"]),
-                                      trailing: const Icon(Icons.abc),
+                                      onTap: () {
+                                        Values.router.go(
+                                            "/detail/${Values.randomArtical[realIndex]["create_time"]}");
+                                      },
                                     );
                                   }
                                 },
@@ -211,7 +269,43 @@ class _ArticalPageState extends State<ArticalPage> {
     }
   }
 
-  void _onSearchPressed(String test) {}
+  void _onSearchPressed(String test) async {
+    http
+        .get(Uri.parse("${Values.serverUrl}/artical_query?search=$searchText"))
+        .then((value) {
+      Values.articalItem = [];
+      var response = utf8.decode(value.bodyBytes);
+      Map<String, dynamic> responseMap = jsonDecode(response);
+      List<dynamic> responseList = responseMap["content"];
+      for (int i = 0; i < responseList.length; i++) {
+        Map<String, dynamic> tmp = responseList[i];
+        Values.articalItem.add({
+          "title": tmp["title"],
+          "subtitle": tmp["discription"],
+          "create_time": tmp["create_time"],
+          "picture": tmp["picture"],
+          "content_md": tmp["content_md"],
+          "type_id": tmp["type_id"]
+        });
+      }
+      Values.articalItem = Values.articalItem.reversed.toList();
+      setState(() {});
+    });
+  }
+
+  void getRandomArtical() {
+    Values.randomArtical = [];
+    var r = Random();
+    Set<int> st = {};
+    while (st.length < 5) {
+      int i = r.nextInt(Values.allArtical.length);
+      st.add(i);
+    }
+    for (int i in st) {
+      Values.randomArtical.add(Values.allArtical[i]);
+    }
+    setState(() {});
+  }
 
   void _onTypeTap(String type_id) {
     Values.articalItem = [];
@@ -224,5 +318,11 @@ class _ArticalPageState extends State<ArticalPage> {
     }
     Values.articalItem = Values.articalItem.reversed.toList();
     setState(() {});
+  }
+
+  void getRunningTime() {
+    DateTime nowTime = DateTime.now();
+    Duration duration = nowTime.difference(Values.dateTime);
+    runningTime = "${duration.inDays}天";
   }
 }
