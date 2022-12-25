@@ -44,7 +44,7 @@ class _ArticalPageState extends State<ArticalPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        margin: const EdgeInsets.only(top: 20, left: 20),
+                        margin: const EdgeInsets.only(left: 20),
                         child: TextFormField(
                           decoration: InputDecoration(
                               suffix: IconButton(
@@ -107,7 +107,7 @@ class _ArticalPageState extends State<ArticalPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                              margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
+                              margin: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
                               child: TextFormField(
                                 decoration: InputDecoration(
                                     suffix: IconButton(
@@ -122,7 +122,7 @@ class _ArticalPageState extends State<ArticalPage> {
                               ),
                             ),
                             Container(
-                                margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
+                                margin: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
                                 child: ExpansionPanelList(
                                   expansionCallback: (panelIndex, isExpanded) {
                                     setState(() {
@@ -164,7 +164,7 @@ class _ArticalPageState extends State<ArticalPage> {
                         )
                       : const Text(""),
                   Container(
-                    margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
+                    margin: const EdgeInsets.only(left: 20, right: 20),
                     child: const Text(
                       "最新文章",
                       style: TextStyle(fontSize: 20),
