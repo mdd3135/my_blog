@@ -9,25 +9,22 @@ class Values {
   static List<Map<String, dynamic>> articalItem = [];
   static List<Map<String, dynamic>> articalType = [];
   static List<Map<String, dynamic>> randomArtical = [];
-  static String fontUrl =
-      "https://gitee.com/mao-dan-dan/blog/raw/master/SourceHanSansCN-Regular.otf";
-  static String randomImgUrl =
-      "https://source.unsplash.com/random/1920x1080/?animation";
+  static String fontUrl = "https://gitee.com/mao-dan-dan/blog/raw/master/SourceHanSansCN-Regular.otf";
+  static String randomImgUrl = "https://source.unsplash.com/random/1920x1080/?animation";
   static String serverUrl = "https://mdd-e.vip.cpolar.top";
   static String detail = "";
   static int visit = 0;
   static DateTime dateTime = DateTime.parse("2022-12-14");
   static List<GoRoute> goRouteList = <GoRoute>[];
-  static MarkdownStyleSheet markdownStyleSheet =
-      MarkdownStyleSheet.fromTheme(ThemeData(
-          fontFamily: "SourceHanSansCN",
-          textTheme: const TextTheme(
-            bodyMedium: TextStyle(fontSize: 20),
-            headlineSmall: TextStyle(fontSize: 28),
-            titleLarge: TextStyle(fontSize: 26),
-            titleMedium: TextStyle(fontSize: 24),
-            bodyLarge: TextStyle(fontSize: 22),
-          )));
+  static MarkdownStyleSheet markdownStyleSheet = MarkdownStyleSheet.fromTheme(ThemeData(
+      fontFamily: "SourceHanSansCN",
+      textTheme: const TextTheme(
+        bodyMedium: TextStyle(fontSize: 20),
+        headlineSmall: TextStyle(fontSize: 28),
+        titleLarge: TextStyle(fontSize: 26),
+        titleMedium: TextStyle(fontSize: 24),
+        bodyLarge: TextStyle(fontSize: 22),
+      )));
 
   static late GoRouter router;
 

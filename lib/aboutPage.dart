@@ -42,9 +42,7 @@ class _AboutPageState extends State<AboutPage> {
                 children: [
                   Container(
                     margin: const EdgeInsets.only(bottom: 10),
-                    child: const Text(
-                        style: TextStyle(color: Colors.white, fontSize: 36),
-                        "关于作者"),
+                    child: const Text(style: TextStyle(color: Colors.white, fontSize: 36), "关于作者"),
                   ),
                   Container(
                     margin: const EdgeInsets.only(bottom: 10),
@@ -56,10 +54,7 @@ class _AboutPageState extends State<AboutPage> {
                             color: Colors.white,
                             Icons.schedule,
                           )),
-                          TextSpan(
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20),
-                              text: "2022年12月20日 16:06"),
+                          TextSpan(style: TextStyle(color: Colors.white, fontSize: 20), text: "2022年12月20日 16:06"),
                         ],
                       ),
                     ),

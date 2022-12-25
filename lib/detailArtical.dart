@@ -59,12 +59,10 @@ class _DetailArticalState extends State<DetailArtical> {
               child: Column(
                 children: [
                   Container(
-                    margin:
-                        const EdgeInsets.only(bottom: 10, left: 20, right: 20),
+                    margin: const EdgeInsets.only(bottom: 10, left: 20, right: 20),
                     child: Text(
                         textAlign: TextAlign.center,
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 36),
+                        style: const TextStyle(color: Colors.white, fontSize: 36),
                         getTitle()),
                   ),
                   Container(
@@ -78,10 +76,7 @@ class _DetailArticalState extends State<DetailArtical> {
                             Icons.schedule,
                           )),
                           TextSpan(
-                              style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontFamily: "SourceHanSansCN"),
+                              style: const TextStyle(color: Colors.white, fontSize: 20, fontFamily: "SourceHanSansCN"),
                               text: getDateTime()),
                         ],
                       ),
@@ -96,10 +91,7 @@ class _DetailArticalState extends State<DetailArtical> {
                           Icons.class_outlined,
                         )),
                         TextSpan(
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontFamily: "SourceHanSansCN"),
+                            style: const TextStyle(color: Colors.white, fontSize: 20, fontFamily: "SourceHanSansCN"),
                             text: "${getType()}    "),
                         const WidgetSpan(
                             child: Icon(
@@ -107,10 +99,7 @@ class _DetailArticalState extends State<DetailArtical> {
                           Icons.visibility,
                         )),
                         TextSpan(
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontFamily: "SourceHanSansCN"),
+                            style: const TextStyle(color: Colors.white, fontSize: 20, fontFamily: "SourceHanSansCN"),
                             text: " ${visit.toString()}"),
                       ],
                     ),
@@ -157,10 +146,7 @@ class _DetailArticalState extends State<DetailArtical> {
   }
 
   void getMessageItem() async {
-    await http
-        .get(Uri.parse(
-            "${Values.serverUrl}/message_query?artical=${widget.detail}"))
-        .then((response) {
+    await http.get(Uri.parse("${Values.serverUrl}/message_query?artical=${widget.detail}")).then((response) {
       var response2 = utf8.decode(response.bodyBytes);
       Map<String, dynamic> responseMap = jsonDecode(response2);
       List<dynamic> content = responseMap["content"];
@@ -222,18 +208,11 @@ class _DetailArticalState extends State<DetailArtical> {
 
   String getDateTime() {
     try {
-      var dateTime =
-          DateTime.fromMillisecondsSinceEpoch(int.parse(widget.detail));
-      String month = dateTime.month < 10
-          ? "0${dateTime.month}"
-          : dateTime.month.toString();
-      String day =
-          dateTime.day < 10 ? "0${dateTime.day}" : dateTime.day.toString();
-      String hour =
-          dateTime.hour < 10 ? "0${dateTime.hour}" : dateTime.hour.toString();
-      String second = dateTime.second < 10
-          ? "0${dateTime.second}"
-          : dateTime.second.toString();
+      var dateTime = DateTime.fromMillisecondsSinceEpoch(int.parse(widget.detail));
+      String month = dateTime.month < 10 ? "0${dateTime.month}" : dateTime.month.toString();
+      String day = dateTime.day < 10 ? "0${dateTime.day}" : dateTime.day.toString();
+      String hour = dateTime.hour < 10 ? "0${dateTime.hour}" : dateTime.hour.toString();
+      String second = dateTime.second < 10 ? "0${dateTime.second}" : dateTime.second.toString();
       String res = "${dateTime.year}年$month月$day日 $hour:$second";
       return res;
     } catch (e) {
@@ -262,10 +241,7 @@ class _DetailArticalState extends State<DetailArtical> {
   }
 
   void getVisit() async {
-    await http
-        .get(Uri.parse(
-            "${Values.serverUrl}/visit_query?artical=${widget.detail}"))
-        .then(((response) {
+    await http.get(Uri.parse("${Values.serverUrl}/visit_query?artical=${widget.detail}")).then(((response) {
       var visitResponse = utf8.decode(response.bodyBytes);
       Map<String, dynamic> visitMap = jsonDecode(visitResponse);
       visit = visitMap["count"];

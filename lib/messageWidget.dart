@@ -33,8 +33,7 @@ class _MessageWidgetState extends State<MessageWidget> {
           child: Column(
             children: [
               Container(
-                margin: const EdgeInsets.only(
-                    top: 20, bottom: 10, left: 20, right: 20),
+                margin: const EdgeInsets.only(top: 20, bottom: 10, left: 20, right: 20),
                 child: TextFormField(
                   style: const TextStyle(fontSize: 20),
                   decoration: const InputDecoration(
@@ -47,8 +46,7 @@ class _MessageWidgetState extends State<MessageWidget> {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(
-                    top: 10, bottom: 20, left: 20, right: 20),
+                margin: const EdgeInsets.only(top: 10, bottom: 20, left: 20, right: 20),
                 child: TextFormField(
                   minLines: 3,
                   maxLines: 5,
@@ -92,9 +90,7 @@ class _MessageWidgetState extends State<MessageWidget> {
                     itemBuilder: (context, index) {
                       int realIndex = index ~/ 2;
                       if (index % 2 == 1) {
-                        return index == widget.messageItem.length * 2 - 1
-                            ? Container()
-                            : const Divider();
+                        return index == widget.messageItem.length * 2 - 1 ? Container() : const Divider();
                       } else {
                         return ListTile(
                           title: Column(
@@ -112,11 +108,8 @@ class _MessageWidgetState extends State<MessageWidget> {
                                     )),
                                     TextSpan(
                                         style: const TextStyle(
-                                            color: Colors.blue,
-                                            fontSize: 16,
-                                            fontFamily: "SourceHanSansCN"),
-                                        text:
-                                            " ${widget.messageItem[realIndex]["name"]}    "),
+                                            color: Colors.blue, fontSize: 16, fontFamily: "SourceHanSansCN"),
+                                        text: " ${widget.messageItem[realIndex]["name"]}    "),
                                     const WidgetSpan(
                                         child: Icon(
                                       size: 22,
@@ -125,11 +118,8 @@ class _MessageWidgetState extends State<MessageWidget> {
                                     )),
                                     TextSpan(
                                         style: const TextStyle(
-                                            color: Colors.blue,
-                                            fontSize: 16,
-                                            fontFamily: "SourceHanSansCN"),
-                                        text:
-                                            " ${getTime(widget.messageItem[realIndex]["create_time"])}"),
+                                            color: Colors.blue, fontSize: 16, fontFamily: "SourceHanSansCN"),
+                                        text: " ${getTime(widget.messageItem[realIndex]["create_time"])}"),
                                   ],
                                 ),
                               ),
@@ -137,16 +127,13 @@ class _MessageWidgetState extends State<MessageWidget> {
                                 "${widget.messageItem[realIndex]["content"]}",
                                 style: const TextStyle(fontSize: 20),
                               ),
-                              widget.messageItem[realIndex]["artical"] ==
-                                      "total"
+                              widget.messageItem[realIndex]["artical"] == "total"
                                   ? const Text("")
                                   : Container(
-                                      alignment:
-                                          AlignmentDirectional.centerStart,
+                                      alignment: AlignmentDirectional.centerStart,
                                       child: TextButton(
                                         onPressed: () {
-                                          Values.router.go(
-                                              "/detail/${widget.messageItem[realIndex]["artical"]}");
+                                          Values.router.go("/detail/${widget.messageItem[realIndex]["artical"]}");
                                         },
                                         child: Text.rich(TextSpan(children: [
                                           const WidgetSpan(
@@ -155,10 +142,8 @@ class _MessageWidgetState extends State<MessageWidget> {
                                             Icons.link,
                                           )),
                                           TextSpan(
-                                            text:
-                                                " ${getTitle(widget.messageItem[realIndex]["artical"])}",
-                                            style:
-                                                const TextStyle(fontSize: 16),
+                                            text: " ${getTitle(widget.messageItem[realIndex]["artical"])}",
+                                            style: const TextStyle(fontSize: 16),
                                           ),
                                         ])),
                                       ),
@@ -183,18 +168,12 @@ class _MessageWidgetState extends State<MessageWidget> {
   }
 
   String getTime(String? timeStamp) {
-    DateTime dateTime =
-        DateTime.fromMillisecondsSinceEpoch(int.parse(timeStamp.toString()));
+    DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(int.parse(timeStamp.toString()));
     String year = dateTime.year.toString();
-    String month =
-        dateTime.month < 10 ? "0${dateTime.month}" : dateTime.month.toString();
-    String day =
-        dateTime.day < 10 ? "0${dateTime.day}" : dateTime.day.toString();
-    String hour =
-        dateTime.hour < 10 ? "0${dateTime.hour}" : dateTime.hour.toString();
-    String minute = dateTime.minute < 10
-        ? "0${dateTime.minute}"
-        : dateTime.minute.toString();
+    String month = dateTime.month < 10 ? "0${dateTime.month}" : dateTime.month.toString();
+    String day = dateTime.day < 10 ? "0${dateTime.day}" : dateTime.day.toString();
+    String hour = dateTime.hour < 10 ? "0${dateTime.hour}" : dateTime.hour.toString();
+    String minute = dateTime.minute < 10 ? "0${dateTime.minute}" : dateTime.minute.toString();
     return "$year年$month月$day日 $hour:$minute";
   }
 
@@ -236,14 +215,8 @@ class _MessageWidgetState extends State<MessageWidget> {
                 ],
               )));
     } else {
-      Map<String, String> mp = {
-        "name": name,
-        "artical": widget.artical,
-        "content": content
-      };
-      http
-          .post(Uri.parse("${Values.serverUrl}/message_add"), body: mp)
-          .then((value) {
+      Map<String, String> mp = {"name": name, "artical": widget.artical, "content": content};
+      http.post(Uri.parse("${Values.serverUrl}/message_add"), body: mp).then((value) {
         var response = utf8.decode(value.bodyBytes);
         Map<String, dynamic> responseMap = jsonDecode(response);
         String create_time = responseMap["create_time"];

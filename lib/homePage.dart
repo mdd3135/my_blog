@@ -95,27 +95,21 @@ class _HomePageState extends State<HomePage> {
                       onPressed: () {
                         Values.router.go("/artical");
                       },
-                      icon: Icon(widget.initIndex == 0
-                          ? Icons.library_books
-                          : Icons.library_books_outlined)),
+                      icon: Icon(widget.initIndex == 0 ? Icons.library_books : Icons.library_books_outlined)),
                   IconButton(
                       tooltip: "关于",
                       padding: const EdgeInsets.symmetric(horizontal: 15),
                       onPressed: () {
                         Values.router.go("/about");
                       },
-                      icon: Icon(widget.initIndex == 1
-                          ? Icons.info
-                          : Icons.info_outlined)),
+                      icon: Icon(widget.initIndex == 1 ? Icons.info : Icons.info_outlined)),
                   IconButton(
                       tooltip: "留言板",
                       padding: const EdgeInsets.symmetric(horizontal: 15),
                       onPressed: () {
                         Values.router.go("/message");
                       },
-                      icon: Icon(widget.initIndex == 2
-                          ? Icons.message
-                          : Icons.message_outlined)),
+                      icon: Icon(widget.initIndex == 2 ? Icons.message : Icons.message_outlined)),
                 ]
               : null,
         ),
@@ -150,9 +144,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     ListTile(
-                      leading: Icon(widget.initIndex == 0
-                          ? Icons.library_books
-                          : Icons.library_books_outlined),
+                      leading: Icon(widget.initIndex == 0 ? Icons.library_books : Icons.library_books_outlined),
                       title: const Text("文章"),
                       onTap: () {
                         Navigator.of(context).pop();
@@ -160,9 +152,7 @@ class _HomePageState extends State<HomePage> {
                       },
                     ),
                     ListTile(
-                      leading: Icon(widget.initIndex == 1
-                          ? Icons.info
-                          : Icons.info_outlined),
+                      leading: Icon(widget.initIndex == 1 ? Icons.info : Icons.info_outlined),
                       title: const Text("关于"),
                       onTap: () {
                         Navigator.of(context).pop();
@@ -170,9 +160,7 @@ class _HomePageState extends State<HomePage> {
                       },
                     ),
                     ListTile(
-                      leading: Icon(widget.initIndex == 2
-                          ? Icons.message
-                          : Icons.message_outlined),
+                      leading: Icon(widget.initIndex == 2 ? Icons.message : Icons.message_outlined),
                       title: const Text("留言板"),
                       onTap: () {
                         Navigator.of(context).pop();

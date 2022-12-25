@@ -37,9 +37,7 @@ class _MessagePageState extends State<MessagePage> {
   }
 
   void getItem() async {
-    await http
-        .get(Uri.parse("${Values.serverUrl}/message_query"))
-        .then((response) {
+    await http.get(Uri.parse("${Values.serverUrl}/message_query")).then((response) {
       var response2 = utf8.decode(response.bodyBytes);
       Map<String, dynamic> responseMap = jsonDecode(response2);
       List<dynamic> content = responseMap["content"];

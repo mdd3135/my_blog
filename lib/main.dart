@@ -19,13 +19,10 @@ main() async {
     List<dynamic> content = typeMap["content"];
     for (int i = 0; i < content.length; i++) {
       Map<String, dynamic> tmp = content[i];
-      Values.articalType
-          .add({"type_id": tmp["type_id"], "type": tmp["type"], "count": 0});
+      Values.articalType.add({"type_id": tmp["type_id"], "type": tmp["type"], "count": 0});
     }
   });
-  await http
-      .get(Uri.parse("${Values.serverUrl}/artical_query"))
-      .then((articalResponse) {
+  await http.get(Uri.parse("${Values.serverUrl}/artical_query")).then((articalResponse) {
     var articalResonse = utf8.decode(articalResponse.bodyBytes);
     Map<String, dynamic> articalMap = jsonDecode(articalResonse);
     List<dynamic> content = articalMap["content"];
@@ -59,8 +56,7 @@ main() async {
       });
     }
   });
-  Values.articalType
-      .add({"type_id": 0, "type": "全部", "count": Values.articalItem.length});
+  Values.articalType.add({"type_id": 0, "type": "全部", "count": Values.articalItem.length});
   Values.articalType = Values.articalType.reversed.toList();
   Values.articalItem = Values.articalItem.reversed.toList();
 

@@ -68,8 +68,7 @@ class _ArticalPageState extends State<ArticalPage> {
                           )),
                       Flexible(
                           child: Container(
-                              margin: const EdgeInsets.only(
-                                  top: 10, bottom: 20, left: 20),
+                              margin: const EdgeInsets.only(top: 10, bottom: 20, left: 20),
                               decoration: BoxDecoration(
                                 color: const Color.fromARGB(16, 33, 149, 243),
                                 borderRadius: BorderRadius.circular(10),
@@ -80,22 +79,16 @@ class _ArticalPageState extends State<ArticalPage> {
                                 itemBuilder: (context, index) {
                                   int realIndex = index ~/ 2;
                                   if (index % 2 == 1) {
-                                    return index ==
-                                            Values.articalType.length * 2 - 1
+                                    return index == Values.articalType.length * 2 - 1
                                         ? const Text("")
                                         : const Divider();
                                   } else {
                                     return ListTile(
                                       onTap: () {
-                                        _onTypeTap(Values.articalType[realIndex]
-                                                ["type_id"]
-                                            .toString());
+                                        _onTypeTap(Values.articalType[realIndex]["type_id"].toString());
                                       },
-                                      title: Text(Values.articalType[realIndex]
-                                          ["type"]),
-                                      trailing: Text(Values
-                                          .articalType[realIndex]["count"]
-                                          .toString()),
+                                      title: Text(Values.articalType[realIndex]["type"]),
+                                      trailing: Text(Values.articalType[realIndex]["count"].toString()),
                                     );
                                   }
                                 },
@@ -114,8 +107,7 @@ class _ArticalPageState extends State<ArticalPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                              margin: const EdgeInsets.only(
-                                  top: 20, left: 20, right: 20),
+                              margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
                               child: TextFormField(
                                 decoration: InputDecoration(
                                     suffix: IconButton(
@@ -130,8 +122,7 @@ class _ArticalPageState extends State<ArticalPage> {
                               ),
                             ),
                             Container(
-                                margin: const EdgeInsets.only(
-                                    top: 20, left: 20, right: 20),
+                                margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
                                 child: ExpansionPanelList(
                                   expansionCallback: (panelIndex, isExpanded) {
                                     setState(() {
@@ -140,45 +131,29 @@ class _ArticalPageState extends State<ArticalPage> {
                                   },
                                   children: [
                                     ExpansionPanel(
-                                        backgroundColor: const Color.fromARGB(
-                                            255, 236, 243, 249),
+                                        backgroundColor: const Color.fromARGB(255, 236, 243, 249),
                                         isExpanded: _isExpanded,
-                                        headerBuilder: ((context, isExpanded) =>
-                                            const Text(
+                                        headerBuilder: ((context, isExpanded) => const Text(
                                               "文章分类",
                                               style: TextStyle(fontSize: 20),
                                             )),
                                         body: ListView.builder(
-                                          physics:
-                                              const NeverScrollableScrollPhysics(),
+                                          physics: const NeverScrollableScrollPhysics(),
                                           shrinkWrap: true,
-                                          itemCount:
-                                              Values.articalType.length * 2,
+                                          itemCount: Values.articalType.length * 2,
                                           itemBuilder: (context, index) {
                                             int realIndex = index ~/ 2;
                                             if (index % 2 == 1) {
-                                              return index ==
-                                                      Values.articalType
-                                                                  .length *
-                                                              2 -
-                                                          1
+                                              return index == Values.articalType.length * 2 - 1
                                                   ? const Text("")
                                                   : const Divider();
                                             } else {
                                               return ListTile(
                                                 onTap: () {
-                                                  _onTypeTap(Values
-                                                      .articalType[realIndex]
-                                                          ["type_id"]
-                                                      .toString());
+                                                  _onTypeTap(Values.articalType[realIndex]["type_id"].toString());
                                                 },
-                                                title: Text(Values
-                                                        .articalType[realIndex]
-                                                    ["type"]),
-                                                trailing: Text(Values
-                                                    .articalType[realIndex]
-                                                        ["count"]
-                                                    .toString()),
+                                                title: Text(Values.articalType[realIndex]["type"]),
+                                                trailing: Text(Values.articalType[realIndex]["count"].toString()),
                                               );
                                             }
                                           },
@@ -196,8 +171,7 @@ class _ArticalPageState extends State<ArticalPage> {
                     ),
                   ),
                   Container(
-                      margin: const EdgeInsets.only(
-                          top: 10, bottom: 20, left: 20, right: 20),
+                      margin: const EdgeInsets.only(top: 10, bottom: 20, left: 20, right: 20),
                       decoration: BoxDecoration(
                         color: const Color.fromARGB(16, 33, 149, 243),
                         borderRadius: BorderRadius.circular(10),
@@ -209,20 +183,16 @@ class _ArticalPageState extends State<ArticalPage> {
                         itemBuilder: (context, index) {
                           int realIndex = index ~/ 2;
                           if (index % 2 == 1) {
-                            return index == Values.articalItem.length * 2 - 1
-                                ? Container()
-                                : const Divider();
+                            return index == Values.articalItem.length * 2 - 1 ? Container() : const Divider();
                           } else {
                             return ListTile(
                               onTap: () {
-                                _onArticalPressed(Values.articalItem[realIndex]
-                                    ["create_time"]);
+                                _onArticalPressed(Values.articalItem[realIndex]["create_time"]);
                               },
                               leading: Image(
                                   image: NetworkImage(
                                       "${Values.serverUrl}/file/${Values.articalItem[realIndex]["picture"]}")),
-                              title:
-                                  Text(Values.articalItem[realIndex]["title"]),
+                              title: Text(Values.articalItem[realIndex]["title"]),
                               subtitle: Text(
                                 Values.articalItem[realIndex]["subtitle"],
                                 maxLines: 5,
@@ -262,16 +232,14 @@ class _ArticalPageState extends State<ArticalPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                              margin: const EdgeInsets.only(
-                                  top: 10, right: 10, left: 10),
+                              margin: const EdgeInsets.only(top: 10, right: 10, left: 10),
                               child: Text(
                                 "访问次数: ${Values.visit}",
                                 style: const TextStyle(fontSize: 16),
                               ),
                             ),
                             Container(
-                              margin: const EdgeInsets.only(
-                                  top: 10, bottom: 10, right: 10, left: 10),
+                              margin: const EdgeInsets.only(top: 10, bottom: 10, right: 10, left: 10),
                               child: Text(
                                 "本站已运行$runningTime",
                                 style: const TextStyle(fontSize: 16),
@@ -288,15 +256,12 @@ class _ArticalPageState extends State<ArticalPage> {
                                 "随机文章",
                                 style: TextStyle(fontSize: 20),
                               ),
-                              IconButton(
-                                  onPressed: getRandomArtical,
-                                  icon: const Icon(Icons.refresh))
+                              IconButton(onPressed: getRandomArtical, icon: const Icon(Icons.refresh))
                             ],
                           )),
                       Flexible(
                           child: Container(
-                              margin: const EdgeInsets.only(
-                                  top: 10, bottom: 20, right: 20),
+                              margin: const EdgeInsets.only(top: 10, bottom: 20, right: 20),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 color: const Color.fromARGB(16, 33, 149, 243),
@@ -307,17 +272,14 @@ class _ArticalPageState extends State<ArticalPage> {
                                 itemBuilder: (context, index) {
                                   int realIndex = index ~/ 2;
                                   if (index % 2 == 1) {
-                                    return index ==
-                                            Values.randomArtical.length * 2 - 1
+                                    return index == Values.randomArtical.length * 2 - 1
                                         ? const Text("")
                                         : const Divider();
                                   } else {
                                     return ListTile(
-                                      title: Text(Values
-                                          .randomArtical[realIndex]["title"]),
+                                      title: Text(Values.randomArtical[realIndex]["title"]),
                                       onTap: () {
-                                        Values.router.go(
-                                            "/detail/${Values.randomArtical[realIndex]["create_time"]}");
+                                        Values.router.go("/detail/${Values.randomArtical[realIndex]["create_time"]}");
                                       },
                                     );
                                   }
@@ -367,9 +329,7 @@ class _ArticalPageState extends State<ArticalPage> {
   }
 
   void _onSearchPressed(String test) async {
-    http
-        .get(Uri.parse("${Values.serverUrl}/artical_query?search=$searchText"))
-        .then((value) {
+    http.get(Uri.parse("${Values.serverUrl}/artical_query?search=$searchText")).then((value) {
       Values.articalItem = [];
       var response = utf8.decode(value.bodyBytes);
       Map<String, dynamic> responseMap = jsonDecode(response);
