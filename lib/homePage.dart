@@ -125,11 +125,28 @@ class _HomePageState extends State<HomePage> {
                 child: ListView(
                   padding: EdgeInsets.zero,
                   children: [
-                    const DrawerHeader(
-                      decoration: BoxDecoration(color: Colors.blue),
-                      child: Text(
-                        "导航",
-                        style: TextStyle(color: Colors.white, fontSize: 20),
+                    DrawerHeader(
+                      decoration: const BoxDecoration(color: Colors.blue),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "导航",
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
+                          const Expanded(child: Text("")),
+                          Container(
+                            margin: const EdgeInsets.only(bottom: 10),
+                            child: Text(
+                              "本站已运行${DateTime.now().difference(Values.dateTime).inDays}天",
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ),
+                          Text(
+                            "访问次数: ${Values.visit}",
+                            style: const TextStyle(color: Colors.white),
+                          )
+                        ],
                       ),
                     ),
                     ListTile(
