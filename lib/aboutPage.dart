@@ -54,7 +54,7 @@ class _AboutPageState extends State<AboutPage> {
                           WidgetSpan(
                               child: Icon(
                             color: Colors.white,
-                            Icons.access_time,
+                            Icons.schedule,
                           )),
                           TextSpan(
                               style:

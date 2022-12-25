@@ -101,15 +101,40 @@ class _MessageWidgetState extends State<MessageWidget> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                "用户: ${widget.messageItem[realIndex]["name"]}    时间: ${getTime(widget.messageItem[realIndex]["create_time"])}",
-                                style: const TextStyle(
-                                    fontFamily: "SourceHanSansCN",
-                                    fontSize: 16,
-                                    color: Colors.green),
+                              Text.rich(
+                                TextSpan(
+                                  children: [
+                                    const WidgetSpan(
+                                        child: Icon(
+                                      // color: Colors.black,
+                                      Icons.person_outline,
+                                      size: 22,
+                                    )),
+                                    TextSpan(
+                                        style: const TextStyle(
+                                            color: Colors.blue,
+                                            fontSize: 16,
+                                            fontFamily: "SourceHanSansCN"),
+                                        text:
+                                            " ${widget.messageItem[realIndex]["name"]}    "),
+                                    const WidgetSpan(
+                                        child: Icon(
+                                      size: 22,
+                                      // color: Colors.black,
+                                      Icons.schedule,
+                                    )),
+                                    TextSpan(
+                                        style: const TextStyle(
+                                            color: Colors.blue,
+                                            fontSize: 16,
+                                            fontFamily: "SourceHanSansCN"),
+                                        text:
+                                            " ${getTime(widget.messageItem[realIndex]["create_time"])}"),
+                                  ],
+                                ),
                               ),
                               Text(
-                                "留言: ${widget.messageItem[realIndex]["content"]}",
+                                "${widget.messageItem[realIndex]["content"]}",
                                 style: const TextStyle(fontSize: 20),
                               ),
                               widget.messageItem[realIndex]["artical"] ==
@@ -119,15 +144,24 @@ class _MessageWidgetState extends State<MessageWidget> {
                                       alignment:
                                           AlignmentDirectional.centerStart,
                                       child: TextButton(
-                                          onPressed: () {
-                                            Values.router.go(
-                                                "/detail/${widget.messageItem[realIndex]["artical"]}");
-                                          },
-                                          child: Text(
-                                            "链接: ${getTitle(widget.messageItem[realIndex]["artical"])}",
+                                        onPressed: () {
+                                          Values.router.go(
+                                              "/detail/${widget.messageItem[realIndex]["artical"]}");
+                                        },
+                                        child: Text.rich(TextSpan(children: [
+                                          const WidgetSpan(
+                                              child: Icon(
+                                            size: 22,
+                                            Icons.link,
+                                          )),
+                                          TextSpan(
+                                            text:
+                                                " ${getTitle(widget.messageItem[realIndex]["artical"])}",
                                             style:
                                                 const TextStyle(fontSize: 16),
-                                          )),
+                                          ),
+                                        ])),
+                                      ),
                                     )
                             ],
                           ),

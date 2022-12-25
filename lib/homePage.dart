@@ -105,8 +105,8 @@ class _HomePageState extends State<HomePage> {
                         Values.router.go("/about");
                       },
                       icon: Icon(widget.initIndex == 1
-                          ? Icons.contact_support
-                          : Icons.contact_support_outlined)),
+                          ? Icons.info
+                          : Icons.info_outlined)),
                   IconButton(
                       tooltip: "留言板",
                       padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -161,8 +161,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                     ListTile(
                       leading: Icon(widget.initIndex == 1
-                          ? Icons.contact_support
-                          : Icons.contact_support_outlined),
+                          ? Icons.info
+                          : Icons.info_outlined),
                       title: const Text("关于"),
                       onTap: () {
                         Navigator.of(context).pop();

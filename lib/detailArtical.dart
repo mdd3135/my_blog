@@ -75,7 +75,7 @@ class _DetailArticalState extends State<DetailArtical> {
                           const WidgetSpan(
                               child: Icon(
                             color: Colors.white,
-                            Icons.access_time,
+                            Icons.schedule,
                           )),
                           TextSpan(
                               style: const TextStyle(

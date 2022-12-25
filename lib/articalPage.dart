@@ -17,6 +17,7 @@ class _ArticalPageState extends State<ArticalPage> {
   // late Timer _timer;
   String searchText = '';
   String runningTime = "";
+  bool _isExpanded = false;
 
   @override
   void initState() {
@@ -131,46 +132,59 @@ class _ArticalPageState extends State<ArticalPage> {
                             Container(
                                 margin: const EdgeInsets.only(
                                     top: 20, left: 20, right: 20),
-                                child: const Text(
-                                  "文章分类",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                  ),
-                                )),
-                            Container(
-                                margin: const EdgeInsets.only(
-                                    top: 10, bottom: 20, left: 20, right: 20),
-                                decoration: BoxDecoration(
-                                  color: const Color.fromARGB(16, 33, 149, 243),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: ListView.builder(
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  shrinkWrap: true,
-                                  itemCount: Values.articalType.length * 2,
-                                  itemBuilder: (context, index) {
-                                    int realIndex = index ~/ 2;
-                                    if (index % 2 == 1) {
-                                      return index ==
-                                              Values.articalType.length * 2 - 1
-                                          ? const Text("")
-                                          : const Divider();
-                                    } else {
-                                      return ListTile(
-                                        onTap: () {
-                                          _onTypeTap(Values
-                                              .articalType[realIndex]["type_id"]
-                                              .toString());
-                                        },
-                                        title: Text(Values
-                                            .articalType[realIndex]["type"]),
-                                        trailing: Text(Values
-                                            .articalType[realIndex]["count"]
-                                            .toString()),
-                                      );
-                                    }
+                                child: ExpansionPanelList(
+                                  expansionCallback: (panelIndex, isExpanded) {
+                                    setState(() {
+                                      _isExpanded = !_isExpanded;
+                                    });
                                   },
-                                ))
+                                  children: [
+                                    ExpansionPanel(
+                                        backgroundColor: const Color.fromARGB(
+                                            255, 236, 243, 249),
+                                        isExpanded: _isExpanded,
+                                        headerBuilder: ((context, isExpanded) =>
+                                            const Text(
+                                              "文章分类",
+                                              style: TextStyle(fontSize: 20),
+                                            )),
+                                        body: ListView.builder(
+                                          physics:
+                                              const NeverScrollableScrollPhysics(),
+                                          shrinkWrap: true,
+                                          itemCount:
+                                              Values.articalType.length * 2,
+                                          itemBuilder: (context, index) {
+                                            int realIndex = index ~/ 2;
+                                            if (index % 2 == 1) {
+                                              return index ==
+                                                      Values.articalType
+                                                                  .length *
+                                                              2 -
+                                                          1
+                                                  ? const Text("")
+                                                  : const Divider();
+                                            } else {
+                                              return ListTile(
+                                                onTap: () {
+                                                  _onTypeTap(Values
+                                                      .articalType[realIndex]
+                                                          ["type_id"]
+                                                      .toString());
+                                                },
+                                                title: Text(Values
+                                                        .articalType[realIndex]
+                                                    ["type"]),
+                                                trailing: Text(Values
+                                                    .articalType[realIndex]
+                                                        ["count"]
+                                                    .toString()),
+                                              );
+                                            }
+                                          },
+                                        ))
+                                  ],
+                                )),
                           ],
                         )
                       : const Text(""),
