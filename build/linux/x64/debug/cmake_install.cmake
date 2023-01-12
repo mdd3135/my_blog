@@ -39,7 +39,7 @@ endif()
 
 # Set default install directory permissions.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "/usr/bin/llvm-objdump")
+  set(CMAKE_OBJDUMP "/usr/bin/objdump")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Runtime" OR NOT CMAKE_INSTALL_COMPONENT)
@@ -71,7 +71,7 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Runtime" OR NOT CMAKE_INSTALL_COMPONENT)
          OLD_RPATH "/home/mdd/文档/flutter/my_blog/build/linux/x64/debug/plugins/url_launcher_linux:/home/mdd/文档/flutter/my_blog/linux/flutter/ephemeral:"
          NEW_RPATH "$ORIGIN/lib")
     if(CMAKE_INSTALL_DO_STRIP)
-      execute_process(COMMAND "/usr/bin/llvm-strip" "$ENV{DESTDIR}/home/mdd/文档/flutter/my_blog/build/linux/x64/debug/bundle/my_blog")
+      execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}/home/mdd/文档/flutter/my_blog/build/linux/x64/debug/bundle/my_blog")
     endif()
   endif()
 endif()

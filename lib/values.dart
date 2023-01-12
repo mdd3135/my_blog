@@ -66,6 +66,12 @@ class Values {
               )),
             ),
             GoRoute(
+                path: "block",
+                pageBuilder: (context, state) => NoTransitionPage(
+                        child: HomePage(
+                      initIndex: 5,
+                    ))),
+            GoRoute(
                 path: "detail",
                 pageBuilder: (context, state) => NoTransitionPage(
                         child: HomePage(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_blog/blockPage.dart';
 import 'package:my_blog/detailArtical.dart';
 import 'package:my_blog/values.dart';
 
@@ -22,14 +23,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late Widget body;
   late Widget title;
-
-  @override
-  void initState() {
-    if (widget.initIndex == 0) {
-      Values.router.go("/artical");
-    }
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,6 +72,16 @@ class _HomePageState extends State<HomePage> {
             Values.router.go("/artical");
           },
           child: const Text("旦旦的个人博客——详情"));
+    } else if(widget.initIndex == 5){
+      body = const BlockPage();
+      title = InkWell(
+          onTap: () {
+            setState(() {
+              Values.articalItem = Values.allArtical.reversed.toList();
+            });
+            Values.router.go("/artical");
+          },
+          child: const Text("被封杀的消息"));
     }
 
     return MaterialApp(
