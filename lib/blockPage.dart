@@ -2,30 +2,21 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:http/http.dart' as http;
-import 'package:my_blog/messageWidget.dart';
 import 'package:my_blog/values.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
 class BlockPage extends StatefulWidget {
-  const BlockPage({
-    super.key,
-  });
+  const BlockPage({super.key});
 
   @override
   State<BlockPage> createState() => _BlockPageState();
 }
 
 class _BlockPageState extends State<BlockPage> {
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return SingleChildScrollView(
         child: Center(
