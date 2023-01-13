@@ -1,11 +1,11 @@
 {
-    "name": "blog",
-    "short_name": "blog",
+    "name": "旦旦的个人博客",
+    "short_name": "旦旦的个人博客",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "旦旦的个人博客.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
