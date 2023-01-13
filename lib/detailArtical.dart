@@ -33,6 +33,7 @@ class _DetailArticalState extends State<DetailArtical> {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     if (widget.detail.isEmpty) {
       return Container();
     }
@@ -50,7 +51,7 @@ class _DetailArticalState extends State<DetailArtical> {
                 child: Image.network(
                   "${Values.serverUrl}/file/${getPicture()}",
                   width: double.infinity,
-                  height: 300,
+                  height: height,
                   fit: BoxFit.cover,
                 ),
               ),
