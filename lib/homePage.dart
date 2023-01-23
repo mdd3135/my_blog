@@ -85,6 +85,7 @@ class _HomePageState extends State<HomePage> {
     }
 
     return MaterialApp(
+      title:"旦旦的个人博客",
       theme: ThemeData(fontFamily: "SourceHanSansCN"),
       debugShowCheckedModeBanner: false,
       home: Scaffold(

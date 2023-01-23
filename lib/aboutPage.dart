@@ -67,7 +67,7 @@ class _AboutPageState extends State<AboutPage> {
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: Color.fromARGB(16, 33, 149, 243),
+            color: const Color.fromARGB(16, 33, 149, 243),
           ),
           margin: const EdgeInsets.all(20),
           width: 800,
